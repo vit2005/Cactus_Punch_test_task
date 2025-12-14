@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae18e8ccf977b084b98a3b49f841fead, type: 3}
   m_Name: RaceStatsConfig
   m_EditorClassIdentifier: 
-  _entries: []
+  _entries:
+  - Race: 0
+    Stats:
+      MaxHealth: 100
+      MoveSpeed: 3
+  - Race: 1
+    Stats:
+      MaxHealth: 150
+      MoveSpeed: 2
+  - Race: 2
+    Stats:
+      MaxHealth: 200
+      MoveSpeed: 2
+  - Race: 3
+    Stats:
+      MaxHealth: 80
+      MoveSpeed: 1.5

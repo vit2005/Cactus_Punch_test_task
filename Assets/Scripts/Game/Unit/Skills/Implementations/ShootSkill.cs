@@ -16,7 +16,8 @@ public class ShootSkill : BaseSkill
         _spawner.Spawn(
             context.CasterPosition,
             context.TargetPosition,
-            Data.Damage
+            Data.Damage,
+            context.Caster
         );
     }
 }

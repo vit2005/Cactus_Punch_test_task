@@ -1,11 +1,15 @@
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class HealthProvider : MonoBehaviour, IHealthProvider
 {
-    [SerializeField] private HealthData _data;
+    private HealthData _data;
 
     public bool IsAlive => _data.IsAlive;
+
+    public void Init(HealthData data)
+    {
+        _data = data;
+    }
 
     public void ApplyDamage(float damage, GameObject source)
     {

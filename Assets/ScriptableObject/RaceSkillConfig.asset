@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: RaceSkillConfig
   m_EditorClassIdentifier: 
   _entries:
+  - Race: 3
+    Skills:
+    - {fileID: 11400000, guid: 521ca55c8f36ea442a9c87e273bfc0ca, type: 2}
+  - Race: 1
+    Skills:
+    - {fileID: 11400000, guid: d051e5ab4c5dfd0438dc6c998d02a81a, type: 2}
+  - Race: 2
+    Skills:
+    - {fileID: 11400000, guid: 4fe09bc09a81fec499fa30d35a66378e, type: 2}
   - Race: 0
     Skills:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 2e6a7f50f21473349b79b969c2045791, type: 2}
