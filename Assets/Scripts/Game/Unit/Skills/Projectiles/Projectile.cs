@@ -24,7 +24,9 @@ public class Projectile : MonoBehaviour
     {
         if (other.TryGetComponent<HealthProvider>(out var healthProvider))
         {
+            Debug.Log($"Projectile hit {other.name}, applying {_damage} damage.");
             healthProvider.ApplyDamage(_damage, _damageOwner);
+            Debug.Log($"Health left: {healthProvider.HP}");
         }
 
         Despawn();

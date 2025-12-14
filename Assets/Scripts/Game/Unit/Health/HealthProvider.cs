@@ -5,6 +5,7 @@ public class HealthProvider : MonoBehaviour, IHealthProvider
     private HealthData _data;
 
     public bool IsAlive => _data.IsAlive;
+    public float HP => (_data.HP / _data.MaxHP) * 100f;
 
     public void Init(HealthData data)
     {

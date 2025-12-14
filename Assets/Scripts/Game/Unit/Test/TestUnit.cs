@@ -11,7 +11,9 @@ public class TestUnit : MonoBehaviour
     {
         HealthProvider.Init(new HealthData
         {
+            HP = RaceStatsConfig.GetStats(UnitRace).MaxHealth,
             MaxHP = RaceStatsConfig.GetStats(UnitRace).MaxHealth,
+
         });
     }
 }
