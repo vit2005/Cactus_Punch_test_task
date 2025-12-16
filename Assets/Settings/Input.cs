@@ -194,6 +194,17 @@ public partial class @Input: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8d74b6d7-5cc8-4c26-8987-c611d1b9a1dc"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e6f410af-211e-4391-ab59-080a74e33bb2"",
                     ""path"": ""<Touchscreen>/primaryTouch/tap"",
                     ""interactions"": ""Hold(duration=0.3)"",
