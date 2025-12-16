@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Shoot
   m_EditorClassIdentifier: 
   Type: 0
-  Range: 0
-  Cooldown: 0
-  Damage: 0
-  Speed: 0
+  Range: 10
+  Cooldown: 2
+  Damage: 10
+  Speed: 5
   Radius: 0
   ConeAngle: 0

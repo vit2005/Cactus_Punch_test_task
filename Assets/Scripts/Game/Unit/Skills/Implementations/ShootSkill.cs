@@ -17,6 +17,7 @@ public class ShootSkill : BaseSkill
             context.CasterPosition,
             context.TargetPosition,
             Data.Damage,
+            Data.Range,
             context.Caster
         );
     }

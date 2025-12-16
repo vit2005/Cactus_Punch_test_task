@@ -10,6 +10,7 @@ public class TestProjectileSpawner : MonoBehaviour
 
     [Header("Shoot settings")]
     [SerializeField] private float damage = 10f;
+    [SerializeField] private float range = 10f;
     [SerializeField] private float shootInterval = 0.5f;
     [SerializeField] private int shotsCount = 5;
 
@@ -56,6 +57,7 @@ public class TestProjectileSpawner : MonoBehaviour
             transform.position,
             targetPosition,
             damage,
+            range,
             gameObject
         );
     }

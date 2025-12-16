@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AreaOfEffect
   m_EditorClassIdentifier: 
   Type: 3
-  Range: 0
-  Cooldown: 0
-  Damage: 0
+  Range: 3
+  Cooldown: 2
+  Damage: 10
   Speed: 0
-  Radius: 0
+  Radius: 3
   ConeAngle: 0

@@ -1,12 +1,20 @@
 using TowerDefence.Systems;
 using UnityEngine;
 
+[RequireComponent(typeof(ProjectileMover))]
 public class Projectile : MonoBehaviour
 {
     private float _damage;
     private GameObject _damageOwner;
     private IObjectPooler _pooler;
     private string _poolKey;
+
+    private ProjectileMover _mover;
+
+    private void Awake()
+    {
+        _mover = GetComponent<ProjectileMover>();
+    }
 
     public void Init(
         float damage,
@@ -24,12 +32,20 @@ public class Projectile : MonoBehaviour
     {
         if (other.TryGetComponent<HealthProvider>(out var healthProvider))
         {
-            Debug.Log($"Projectile hit {other.name}, applying {_damage} damage.");
             healthProvider.ApplyDamage(_damage, _damageOwner);
-            Debug.Log($"Health left: {healthProvider.HP}");
         }
 
         Despawn();
+    }
+
+    private void OnEnable()
+    {
+        _mover.OnMaxDistanceReached += Despawn;
+    }
+
+    private void OnDisable()
+    {
+        _mover.OnMaxDistanceReached -= Despawn;
     }
 
     private void Despawn()

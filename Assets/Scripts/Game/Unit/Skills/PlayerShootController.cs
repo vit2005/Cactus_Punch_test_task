@@ -12,9 +12,6 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
     private bool _fire;
     private bool _isAiming;
 
-    private Vector2 _aimDir;
-    private Vector2 _aimStartScreenPos;
-
     private void Awake()
     {
         _skillExecutor = GetComponent<SkillExecutor>();
@@ -40,16 +37,13 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
 
         float range = _skillExecutor.GetRange(shootSkillType);
 
-        Vector3 dir = new Vector3(_aimDir.x, 0f, _aimDir.y);
-        if (dir.sqrMagnitude < 0.001f)
-            dir = transform.forward;
-
-        Vector3 targetPos = transform.position + dir.normalized * range;
+        Vector3 targetPos = transform.position + transform.forward * range;
 
         _skillExecutor.TryUse(shootSkillType, targetPos);
 
         _fire = false;
     }
+
 
     #region Input Callbacks
 
@@ -62,10 +56,10 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
         if (!IsAttackSide(screenPos))
             return;
 
-        // швидкий постр≥л Ч у forward
-        _aimDir = Vector2.zero;
         _fire = true;
     }
+
+
 
     public void OnHold(InputAction.CallbackContext context)
     {
@@ -73,32 +67,16 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
         if (!IsAttackSide(screenPos))
             return;
 
-        if (context.started)
-        {
-            _isAiming = true;
-            _aimStartScreenPos = screenPos;
-            _aimDir = Vector2.zero;
-            // тут можна включити UI приц≥лу
-        }
-
-        if (context.canceled && _isAiming)
-        {
-            _isAiming = false;
+        if (context.performed)
             _fire = true;
-            // тут можна сховати UI приц≥лу
-        }
     }
+
 
     public void OnTouchDelta(InputAction.CallbackContext context)
     {
         if (!_isAiming)
             return;
 
-        Vector2 delta = context.ReadValue<Vector2>();
-        if (delta.sqrMagnitude < 0.01f)
-            return;
-
-        _aimDir = delta.normalized;
         // тут можна оновлювати UI приц≥лу
     }
 
@@ -122,6 +100,7 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
 
         return Mouse.current.position.ReadValue();
     }
+
 
     #endregion
 }

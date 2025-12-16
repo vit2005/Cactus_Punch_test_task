@@ -50,6 +50,7 @@ public class ProjectileSpawner
         Vector3 casterPosition,
         Vector3? targetPosition,
         float damage,
+        float range,
         GameObject damageOwner)
     {
         var projectile = _pooler.Get<Projectile>(ProjectilePoolKey);
@@ -69,7 +70,6 @@ public class ProjectileSpawner
             ProjectilePoolKey
         );
 
-        // якщо рух без Rigidbody
-        projectile.GetComponent<ProjectileMover>()?.Launch();
+        projectile.GetComponent<ProjectileMover>()?.Launch(range);
     }
 }

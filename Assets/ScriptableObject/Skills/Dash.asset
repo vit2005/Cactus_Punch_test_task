@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Dash
   m_EditorClassIdentifier: 
   Type: 1
-  Range: 0
-  Cooldown: 0
-  Damage: 0
+  Range: 5
+  Cooldown: 8
+  Damage: 10
   Speed: 0
-  Radius: 0
+  Radius: 2
   ConeAngle: 0
