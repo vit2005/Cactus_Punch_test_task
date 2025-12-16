@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 public class TeamMember : MonoBehaviour
 {
+    public event Action<TeamSide> TeamChanged;
+
     [field: SerializeField]
     public TeamSide Team { get; private set; }
 
@@ -11,7 +14,11 @@ public class TeamMember : MonoBehaviour
     /// </summary>
     public void SetTeam(TeamSide team)
     {
+        if (Team == team)
+            return;
+
         Team = team;
+        TeamChanged?.Invoke(team);
     }
 
     /// <summary>

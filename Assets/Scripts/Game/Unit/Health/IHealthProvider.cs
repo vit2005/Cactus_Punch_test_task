@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public interface IHealthProvider
@@ -6,6 +7,8 @@ public interface IHealthProvider
     void ApplyDamage(float damage, GameObject source);
     void ApplyHeal(float amount);
 
+    public event Action<GameObject> OnDeath;
+
     // bool CanRevive { get; } // Optional property to indicate if the unit can be revived
-    void Revive(float hp);
+    void Revive(float? hp);
 }
