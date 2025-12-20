@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     private string _poolKey;
 
     private ProjectileMover _mover;
+    private TeamSide? _teamToIgnore;
 
     private void Awake()
     {
@@ -26,12 +27,22 @@ public class Projectile : MonoBehaviour
         _damageOwner = damageOwner;
         _pooler = pooler;
         _poolKey = poolKey;
+
+        if (damageOwner.TryGetComponent<TeamMember>(out TeamMember teamMember))
+        {
+            _teamToIgnore = teamMember.Team;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<HealthProvider>(out var healthProvider))
         {
+            if (_teamToIgnore.HasValue &&
+                other.TryGetComponent<TeamMember>(out var teamMember) &&
+                teamMember.Team == _teamToIgnore.Value)
+                return;
+
             healthProvider.ApplyDamage(_damage, _damageOwner);
         }
 

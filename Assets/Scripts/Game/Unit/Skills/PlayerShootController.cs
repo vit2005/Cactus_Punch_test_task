@@ -1,19 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(SkillExecutor))]
 public class PlayerShootController : MonoBehaviour, Input.IGameActions
 {
-    [SerializeField] private SkillTypeEnum shootSkillType = SkillTypeEnum.Shoot;
+    [SerializeField] private Transform _shootPoint;
+    [SerializeField] private float _shootCooldown = 0.5f;
 
+    private PlayerInputController _playerInput;
     private SkillExecutor _skillExecutor;
     private Input _input;
-
-    private bool _fire;
-    private bool _isAiming;
+    private float _lastShootTime;
 
     private void Awake()
     {
+        _playerInput = GetComponent<PlayerInputController>();
         _skillExecutor = GetComponent<SkillExecutor>();
 
         _input = new Input();
@@ -30,77 +30,52 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
         _input.Game.Disable();
     }
 
-    private void Update()
+    private void Shoot()
     {
-        if (!_fire)
+        if (Time.time - _lastShootTime < _shootCooldown)
             return;
 
-        float range = _skillExecutor.GetRange(shootSkillType);
+        _lastShootTime = Time.time;
 
-        Vector3 targetPos = transform.position + transform.forward * range;
-
-        _skillExecutor.TryUse(shootSkillType, targetPos);
-
-        _fire = false;
+        Vector3 targetPosition = _playerInput.GetAimDirection();
+        Debug.Log("Try shoot");
+        _skillExecutor.TryUse(SkillTypeEnum.Shoot, targetPosition);
     }
 
+#if UNITY_ANDROID || UNITY_IOS
+    private bool IsAttackSide(Vector2 screenPosition)
+    {
+        // Left side of screen is for shooting
+        return screenPosition.x < Screen.width * 0.5f;
+    }
+#endif
 
-    #region Input Callbacks
+    // ===== Input callbacks =====
 
     public void OnTap(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            return;
-
-        Vector2 screenPos = GetPointerPosition();
-        if (!IsAttackSide(screenPos))
-            return;
-
-        _fire = true;
-    }
-
-
-
-    public void OnHold(InputAction.CallbackContext context)
-    {
-        Vector2 screenPos = GetPointerPosition();
-        if (!IsAttackSide(screenPos))
-            return;
-
+#if UNITY_ANDROID || UNITY_IOS
         if (context.performed)
-            _fire = true;
+        {
+            Vector2 tapPosition = _input.Game.TouchPosition.ReadValue<Vector2>();
+            
+            if (IsAttackSide(tapPosition))
+            {
+                Shoot();
+            }
+        }
+#elif UNITY_STANDALONE || UNITY_EDITOR
+        if (context.performed)
+        {
+            Shoot();
+        }
+#endif
     }
 
-
-    public void OnTouchDelta(InputAction.CallbackContext context)
-    {
-        if (!_isAiming)
-            return;
-
-        // тут можна оновлювати UI прицілу
-    }
-
-    public void OnMove(InputAction.CallbackContext context) { }
-    public void OnTouchPhase(InputAction.CallbackContext context) { }
+    // Unused callbacks
+    public void OnTouchDelta(InputAction.CallbackContext context) { }
     public void OnTouchPosition(InputAction.CallbackContext context) { }
-
-    #endregion
-
-    #region Helpers
-
-    private bool IsAttackSide(Vector2 screenPos)
-    {
-        return screenPos.x < Screen.width * 0.5f;
-    }
-
-    private Vector2 GetPointerPosition()
-    {
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
-            return Touchscreen.current.primaryTouch.position.ReadValue();
-
-        return Mouse.current.position.ReadValue();
-    }
-
-
-    #endregion
+    public void OnTouchPhase(InputAction.CallbackContext context) { }
+    public void OnHold(InputAction.CallbackContext context) { }
+    public void OnMove(InputAction.CallbackContext context) { }
 }

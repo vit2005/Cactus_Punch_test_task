@@ -12,6 +12,7 @@ namespace TowerDefence.Game
         private IEventToken _resumeToken;
         private IEventToken _gameOverToken;
         private IEventToken _returnToMenuToken;
+        private GameplayController _gameplayController;
 
         public async void OnEnter()
         {
@@ -23,6 +24,13 @@ namespace TowerDefence.Game
             _resumeToken = _eventBus.Subscribe<ResumeGameRequestedEvent>(OnResumeRequested);
             _gameOverToken = _eventBus.Subscribe<GameOverEvent>(OnGameOver);
             _returnToMenuToken = _eventBus.Subscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
+
+            // Find GameplayController in scene
+            _gameplayController = Object.FindObjectOfType<GameplayController>();
+            if (_gameplayController == null)
+            {
+                Debug.LogError("GameplayController not found in scene! Make sure it exists in Gameplay scene.");
+            }
 
             var uiRegistry = Services.Get<IUIRegistry>();
             if (uiRegistry.TryGetScreen<IScreen>("GameplayHUD", out var hud))
@@ -48,7 +56,10 @@ namespace TowerDefence.Game
             if (_returnToMenuToken != null) _eventBus.Unsubscribe(_returnToMenuToken);
         }
 
-        public void Tick(float deltaTime){}
+        public void Tick(float deltaTime)
+        {
+            // Game logic updates can be handled here if needed
+        }
 
         private async void OnPauseRequested(PauseGameRequestedEvent evt)
         {
@@ -72,9 +83,29 @@ namespace TowerDefence.Game
             await screenRouter.HideModalAsync();
         }
 
-        private async void OnGameOver(GameOverEvent evt){}
+        private async void OnGameOver(GameOverEvent evt)
+        {
+            Time.timeScale = 0f;
+
+            var uiRegistry = Services.Get<IUIRegistry>();
+            if (uiRegistry.TryGetScreen<IScreen>("GameOver", out var gameOverScreen))
+            {
+                var screenRouter = Services.Get<IScreenRouter>();
+                await screenRouter.ShowModalAsync(gameOverScreen);
+            }
+            else
+            {
+                Debug.LogWarning("GameOver screen not found. Returning to menu.");
+                await ReturnToMenuInternal();
+            }
+        }
 
         private async void OnReturnToMenu(ReturnToMenuRequestedEvent evt)
+        {
+            await ReturnToMenuInternal();
+        }
+
+        private async System.Threading.Tasks.Task ReturnToMenuInternal()
         {
             Time.timeScale = 1f;
 

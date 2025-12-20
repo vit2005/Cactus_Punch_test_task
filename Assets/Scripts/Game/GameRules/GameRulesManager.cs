@@ -2,17 +2,20 @@
 // Game Manager для керування правилами
 // ============================================
 using System.Collections.Generic;
+using TowerDefence.Core;
 using UnityEngine;
 
 public class GameRulesManager : MonoBehaviour
 {
     private GameRuleStrategy _currentRuleStrategy;
     private List<TeamMember> _allPlayers;
+    private IEventBus _eventBus;
 
     public void InitializeGameRules(GameRuleStrategy currentRuleStrategy, List<TeamMember> allPlayers)
     {
         _currentRuleStrategy = currentRuleStrategy;
         _allPlayers = allPlayers;
+        _eventBus = Services.Get<IEventBus>();
 
         _currentRuleStrategy.Initialize(_allPlayers);
 
@@ -30,6 +33,7 @@ public class GameRulesManager : MonoBehaviour
     private void HandleVictory(VictoryResult result)
     {
         Debug.Log($"GameManager: Гра закінчена! Тип перемоги: {result.Type}");
+        Debug.Log($"Game Over! Winners: {result.WinningTeam}");
 
         switch (result.Type)
         {
@@ -42,6 +46,12 @@ public class GameRulesManager : MonoBehaviour
             case VictoryType.Draw:
                 Debug.Log("Нічия!");
                 break;
+        }
+
+        // Publish game over event
+        if (_eventBus != null)
+        {
+            _eventBus.Publish(new TowerDefence.Game.GameOverEvent());
         }
 
         // Тут можна показати екран перемоги, зупинити гру і т.д.

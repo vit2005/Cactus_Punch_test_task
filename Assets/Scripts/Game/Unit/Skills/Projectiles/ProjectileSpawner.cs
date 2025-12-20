@@ -62,7 +62,7 @@ public class ProjectileSpawner
             var dir = (targetPosition.Value - casterPosition).normalized;
             projectile.transform.forward = dir;
         }
-
+        if (damageOwner.name == "Player") Debug.Log($"Projectile spawned");
         projectile.Init(
             damage,
             damageOwner,
