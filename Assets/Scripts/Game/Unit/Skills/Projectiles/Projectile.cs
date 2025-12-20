@@ -36,6 +36,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.name == _damageOwner.name) return;
+
         if (other.TryGetComponent<HealthProvider>(out var healthProvider))
         {
             if (_teamToIgnore.HasValue &&
@@ -61,6 +63,10 @@ public class Projectile : MonoBehaviour
 
     private void Despawn()
     {
+        if (_damageOwner.name == "Player")
+        {
+            Debug.Log("Despawn");
+        }
         _pooler.Release(_poolKey, this);
     }
 }

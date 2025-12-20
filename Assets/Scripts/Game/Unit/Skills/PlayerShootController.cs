@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerShootController : MonoBehaviour, Input.IGameActions
 {
-    [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _shootCooldown = 0.5f;
 
     private PlayerInputController _playerInput;
@@ -37,8 +36,7 @@ public class PlayerShootController : MonoBehaviour, Input.IGameActions
 
         _lastShootTime = Time.time;
 
-        Vector3 targetPosition = _playerInput.GetAimDirection();
-        Debug.Log("Try shoot");
+        Vector3 targetPosition = _playerInput.GetAimPosition();
         _skillExecutor.TryUse(SkillTypeEnum.Shoot, targetPosition);
     }
 

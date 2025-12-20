@@ -14,8 +14,12 @@ public class ProjectileMover : MonoBehaviour
     public void Launch(float maxDistance)
     {
         _maxDistance = maxDistance;
-        _startPosition = transform.position;
         _active = true;
+    }
+
+    private void OnEnable()
+    {
+        _startPosition = transform.position;
     }
 
     private void Update()
@@ -34,5 +38,6 @@ public class ProjectileMover : MonoBehaviour
     private void OnDisable()
     {
         _active = false;
+        _startPosition = Vector3.zero; // скинути позицію
     }
 }

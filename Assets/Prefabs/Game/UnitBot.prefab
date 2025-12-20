@@ -237,10 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcca278332c3b94c8311fbbeba31c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 5084582624874318861}
   skillDatas:
   - {fileID: 11400000, guid: 521ca55c8f36ea442a9c87e273bfc0ca, type: 2}
   projectilePrefab: {fileID: 5270117601277476227, guid: 29890afecdcbeb343b1c96fa800a6d43, type: 3}
-  projectileRoot: {fileID: 5269701964358313113}
 --- !u!114 &6867414148661045025
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -239,10 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcca278332c3b94c8311fbbeba31c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 5084582624874318861}
   skillDatas:
   - {fileID: 11400000, guid: 521ca55c8f36ea442a9c87e273bfc0ca, type: 2}
   projectilePrefab: {fileID: 5270117601277476227, guid: 29890afecdcbeb343b1c96fa800a6d43, type: 3}
-  projectileRoot: {fileID: 5269701964358313113}
 --- !u!114 &8746380784241998213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d6dfec323f45b45872fe969207d81b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 5084582624874318861}
 --- !u!114 &4693339622264396264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +282,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b693f3e242f418b48a7f88b8cdedec6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 9085786417463276675, guid: 29890afecdcbeb343b1c96fa800a6d43, type: 3}
-  _shootPoint: {fileID: 5269701964358313113}
   _shootCooldown: 0.5

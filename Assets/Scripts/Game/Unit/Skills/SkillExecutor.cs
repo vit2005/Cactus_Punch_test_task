@@ -2,15 +2,18 @@ using System;
 using System.Collections.Generic;
 using TowerDefence.Systems;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SkillExecutor : MonoBehaviour
 {
+    [Header("Position")]
+    [SerializeField] private NavMeshAgent navMeshAgent;
+
     [Header("Skills")]
     [SerializeField] private SkillData[] skillDatas;
 
     [Header("Projectile (only for skills that need it)")]
     [SerializeField] private Projectile projectilePrefab;
-    [SerializeField] private Transform projectileRoot;
 
     private ObjectPooler _pooler;
     private ProjectileSpawner _projectileSpawner;
@@ -38,7 +41,7 @@ public class SkillExecutor : MonoBehaviour
         _projectileSpawner = new ProjectileSpawner(
             _pooler,
             projectilePrefab,
-            projectileRoot
+            transform.parent
         );
     }
 
@@ -81,7 +84,7 @@ public class SkillExecutor : MonoBehaviour
         {
             Caster = gameObject,
             Target = target,
-            CasterPosition = transform.position,
+            CasterPosition = navMeshAgent.nextPosition,
             TargetPosition = targetPosition
         };
 

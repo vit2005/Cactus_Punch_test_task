@@ -62,7 +62,12 @@ public class ProjectileSpawner
             var dir = (targetPosition.Value - casterPosition).normalized;
             projectile.transform.forward = dir;
         }
-        if (damageOwner.name == "Player") Debug.Log($"Projectile spawned");
+
+        if (damageOwner.name == "Player") 
+            Debug.Log($"Projectile spawned");
+
+        projectile.GetComponent<ProjectileMover>()?.Launch(range);
+
         projectile.Init(
             damage,
             damageOwner,
@@ -70,6 +75,5 @@ public class ProjectileSpawner
             ProjectilePoolKey
         );
 
-        projectile.GetComponent<ProjectileMover>()?.Launch(range);
     }
 }

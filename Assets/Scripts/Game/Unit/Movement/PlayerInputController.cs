@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour, Input.IGameActions
 {
+    [SerializeField] private NavMeshAgent _navMeshAgent;
     private Input _input;
     private IMovementController _movement;
 
@@ -74,12 +76,12 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
         if (_mainCamera == null) return;
 
         Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
+        Plane groundPlane = new Plane(Vector3.up, _navMeshAgent.nextPosition);
 
         if (groundPlane.Raycast(ray, out float distance))
         {
             Vector3 worldPoint = ray.GetPoint(distance);
-            Vector3 direction = worldPoint - transform.position;
+            Vector3 direction = worldPoint - _navMeshAgent.nextPosition;
             direction.y = 0f;
 
             if (direction.sqrMagnitude > 0.001f)
@@ -112,7 +114,7 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
 #endif
     }
 
-    public Vector3 GetAimDirection()
+    public Vector3 GetAimPosition()
     {
 #if UNITY_ANDROID || UNITY_IOS
         // Mobile: shoot in facing direction
@@ -122,16 +124,20 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
         if (_mainCamera == null) return transform.forward;
 
         Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Plane groundPlane = new Plane(Vector3.up, transform.position);
+        Plane groundPlane = new Plane(Vector3.up, _navMeshAgent.nextPosition);
 
         if (groundPlane.Raycast(ray, out float distance))
         {
-            return ray.GetPoint(distance);
+            Vector3 worldPoint = ray.GetPoint(distance);
+            worldPoint.y = _navMeshAgent.nextPosition.y;
+            Debug.Log("transform.position = " + transform.position.ToString() + 
+                ", navMeshAgentPosition = " + _navMeshAgent.nextPosition.ToString());
+            return worldPoint;
         }
 
         return Vector3.zero;
 #else
-        return transform.forward;
+        return _transform.forward;
 #endif
     }
 }
