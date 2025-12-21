@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitBotEnemy5
       objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
       value: 256
@@ -1077,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitBotEnemy2
       objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
       value: 256
@@ -1155,6 +1163,10 @@ PrefabInstance:
     - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: m_Name
       value: UnitBotAlly3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
@@ -1238,7 +1250,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1394,8 +1406,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -85.933105, y: 0}
-  m_SizeDelta: {x: 109.877686, y: 30}
+  m_AnchoredPosition: {x: -52, y: -0.000011444092}
+  m_SizeDelta: {x: 39.9655, y: 35.525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &496212160
 MonoBehaviour:
@@ -1538,6 +1550,10 @@ PrefabInstance:
     - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: m_Name
       value: UnitBotAlly1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
@@ -1837,6 +1853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitBotAlly4
       objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
       value: 256
@@ -1955,6 +1975,10 @@ PrefabInstance:
     - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: m_Name
       value: UnitBotAlly2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
@@ -2102,7 +2126,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2210,7 +2234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2476,7 +2500,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2584,7 +2608,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3145,7 +3169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3241,6 +3265,10 @@ PrefabInstance:
     - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: m_Name
       value: UnitBotEnemy1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
@@ -3511,6 +3539,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitBotEnemy4
       objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits
       value: 256
@@ -3699,12 +3731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4061,7 +4093,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4169,7 +4201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ffd29338177acc24caf2a4de2727217a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4248,8 +4280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2.125}
+  m_SizeDelta: {x: 0, y: -4.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963495134
 MonoBehaviour:
@@ -4271,7 +4303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: '| |'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4304,11 +4336,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -16.39
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4822,6 +4854,10 @@ PrefabInstance:
     - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: m_Name
       value: UnitBotEnemy3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258104775356891158, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6867414148661045025, guid: e8996a70ad21538478078c48b3aaee01, type: 3}
       propertyPath: obstacleMask.m_Bits

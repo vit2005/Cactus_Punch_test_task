@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 5084582624874318861}
+  _mobileRotationSpeed: 10
 --- !u!114 &4693339622264396264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,3 +284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootCooldown: 0.5
+  _navMeshAgent: {fileID: 5084582624874318861}
+  _detectionRadius: 1000
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _eyeHeight: 0
+  _projectileWidth: 0.3

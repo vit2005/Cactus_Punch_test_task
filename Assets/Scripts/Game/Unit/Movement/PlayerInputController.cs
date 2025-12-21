@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour, Input.IGameActions
 {
     [SerializeField] private NavMeshAgent _navMeshAgent;
+
+#if UNITY_ANDROID || UNITY_IOS
+    [SerializeField] private float _mobileRotationSpeed = 10f;
+#endif
+
     private Input _input;
     private IMovementController _movement;
 
@@ -46,6 +51,9 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
         {
             dir.Normalize();
             _movement.Move(dir);
+
+            // Mobile: Поворот у напрямку руху (як у Brawl Stars)
+            RotateInMovementDirection(dir);
         }
         else
         {
@@ -69,6 +77,21 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
         RotateTowardsMouse();
 #endif
     }
+
+#if UNITY_ANDROID || UNITY_IOS
+    private void RotateInMovementDirection(Vector3 direction)
+    {
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                _mobileRotationSpeed * Time.deltaTime
+            );
+        }
+    }
+#endif
 
 #if UNITY_STANDALONE || UNITY_EDITOR
     private void RotateTowardsMouse()
@@ -117,8 +140,8 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
     public Vector3 GetAimPosition()
     {
 #if UNITY_ANDROID || UNITY_IOS
-        // Mobile: shoot in facing direction
-        return transform.forward;
+        // Mobile: shoot in facing direction (не використовується при автоприцілі)
+        return transform.position + transform.forward * 10f;
 #elif UNITY_STANDALONE || UNITY_EDITOR
         // Desktop: shoot towards mouse
         if (_mainCamera == null) return transform.forward;
@@ -130,14 +153,12 @@ public class PlayerInputController : MonoBehaviour, Input.IGameActions
         {
             Vector3 worldPoint = ray.GetPoint(distance);
             worldPoint.y = _navMeshAgent.nextPosition.y;
-            Debug.Log("transform.position = " + transform.position.ToString() + 
-                ", navMeshAgentPosition = " + _navMeshAgent.nextPosition.ToString());
             return worldPoint;
         }
 
         return Vector3.zero;
 #else
-        return _transform.forward;
+        return transform.position + transform.forward * 10f;
 #endif
     }
 }
