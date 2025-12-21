@@ -117,7 +117,11 @@ namespace TowerDefence.UI
                 return;
             }
 
+            // Create TaskCompletionSource to properly await tween completion
+            var tcs = new TaskCompletionSource<bool>();
+
             _fadeTween = _canvasGroup.DOFade(1f, 0.3f)
+                .SetUpdate(true) // Important: use unscaled time (works even when Time.timeScale = 0)
                 .OnComplete(() =>
                 {
                     if (_canvasGroup != null && !_isDestroyed)
@@ -125,11 +129,13 @@ namespace TowerDefence.UI
                         _canvasGroup.interactable = true;
                         _canvasGroup.blocksRaycasts = true;
                     }
-                });
+                    tcs.TrySetResult(true);
+                })
+                .OnKill(() => tcs.TrySetCanceled());
 
             try
             {
-                await _fadeTween.AsyncWaitForCompletion();
+                await tcs.Task;
             }
             catch (System.Exception)
             {
@@ -157,18 +163,24 @@ namespace TowerDefence.UI
                 return;
             }
 
+            // Create TaskCompletionSource to properly await tween completion
+            var tcs = new TaskCompletionSource<bool>();
+
             _fadeTween = _canvasGroup.DOFade(0f, 0.3f)
+                .SetUpdate(true) // Important: use unscaled time
                 .OnComplete(() =>
                 {
                     if (!_isDestroyed && gameObject != null)
                     {
                         gameObject.SetActive(false);
                     }
-                });
+                    tcs.TrySetResult(true);
+                })
+                .OnKill(() => tcs.TrySetCanceled());
 
             try
             {
-                await _fadeTween.AsyncWaitForCompletion();
+                await tcs.Task;
             }
             catch (System.Exception)
             {

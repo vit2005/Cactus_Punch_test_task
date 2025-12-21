@@ -12,7 +12,6 @@ namespace TowerDefence.Game
         private IEventToken _resumeToken;
         private IEventToken _gameOverToken;
         private IEventToken _returnToMenuToken;
-        private GameplayController _gameplayController;
 
         public async void OnEnter()
         {
@@ -24,13 +23,6 @@ namespace TowerDefence.Game
             _resumeToken = _eventBus.Subscribe<ResumeGameRequestedEvent>(OnResumeRequested);
             _gameOverToken = _eventBus.Subscribe<GameOverEvent>(OnGameOver);
             _returnToMenuToken = _eventBus.Subscribe<ReturnToMenuRequestedEvent>(OnReturnToMenu);
-
-            // Find GameplayController in scene
-            _gameplayController = Object.FindObjectOfType<GameplayController>();
-            if (_gameplayController == null)
-            {
-                Debug.LogError("GameplayController not found in scene! Make sure it exists in Gameplay scene.");
-            }
 
             var uiRegistry = Services.Get<IUIRegistry>();
             if (uiRegistry.TryGetScreen<IScreen>("GameplayHUD", out var hud))
@@ -98,6 +90,9 @@ namespace TowerDefence.Game
                 Debug.LogWarning("GameOver screen not found. Returning to menu.");
                 await ReturnToMenuInternal();
             }
+
+            var stateMachine = Services.Get<IStateMachine>();
+            stateMachine.SetState(new GameOverState());
         }
 
         private async void OnReturnToMenu(ReturnToMenuRequestedEvent evt)

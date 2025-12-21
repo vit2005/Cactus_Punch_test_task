@@ -14,6 +14,12 @@ namespace TowerDefence.Systems
 
         public void Init()
         {
+            // Subscribe to scene loaded/unloaded events to keep track of loaded scenes
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+            // Track initially loaded scenes
+            _loadedScenes.Clear();
             for (var i = 0; i < SceneManager.sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
@@ -22,6 +28,18 @@ namespace TowerDefence.Systems
                     _loadedScenes.Add(scene.name);
                 }
             }
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            _loadedScenes.Add(scene.name);
+            Debug.Log($"[SceneLoader] Scene loaded callback: {scene.name}");
+        }
+
+        private void OnSceneUnloaded(Scene scene)
+        {
+            _loadedScenes.Remove(scene.name);
+            Debug.Log($"[SceneLoader] Scene unloaded callback: {scene.name}");
         }
 
         public async Task LoadSceneAsync(string sceneName, LoadSceneMode mode, CancellationToken cancellationToken = default)
@@ -37,9 +55,11 @@ namespace TowerDefence.Systems
                 return;
             }
 
-            if (mode == LoadSceneMode.Single && _loadedScenes.Contains(sceneName))
+            // For Single mode, we always reload (Unity will handle unloading current scene)
+            // For Additive mode, check if already loaded
+            if (mode == LoadSceneMode.Additive && _loadedScenes.Contains(sceneName))
             {
-                Debug.LogWarning($"Scene '{sceneName}' is already loaded.");
+                Debug.LogWarning($"Scene '{sceneName}' is already loaded in additive mode.");
                 return;
             }
 
@@ -47,6 +67,12 @@ namespace TowerDefence.Systems
 
             try
             {
+                // If loading in Single mode, clear our tracked scenes as Unity will unload everything
+                if (mode == LoadSceneMode.Single)
+                {
+                    _loadedScenes.Clear();
+                }
+
                 var operation = SceneManager.LoadSceneAsync(sceneName, mode);
                 if (operation == null)
                 {
@@ -79,7 +105,7 @@ namespace TowerDefence.Systems
                     await Task.Yield();
                 }
 
-                _loadedScenes.Add(sceneName);
+                // The callback will add the scene to _loadedScenes
                 Debug.Log($"Scene loaded: {sceneName}");
             }
             finally
@@ -118,7 +144,7 @@ namespace TowerDefence.Systems
                 await Task.Yield();
             }
 
-            _loadedScenes.Remove(sceneName);
+            // The callback will remove the scene from _loadedScenes
             Debug.Log($"Scene unloaded: {sceneName}");
         }
 
@@ -126,6 +152,8 @@ namespace TowerDefence.Systems
 
         public void Dispose()
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
             _loadingScenes.Clear();
             _loadedScenes.Clear();
         }
